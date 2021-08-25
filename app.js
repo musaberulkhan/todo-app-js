@@ -11,8 +11,6 @@ todoList.addEventListener('click', deleteCheck);
 filterOption.addEventListener('click', filterTodo);
 
 
-
-
 //Functions
 function addTodoButton(event) {
     //Prevent Form from Submitting
@@ -29,11 +27,14 @@ function addTodoButton(event) {
 }
 
 
-function addTodoFunction(todoValue) {
+function addTodoFunction(todoValue, status="Unchecked") {
     //TodoDiv
     const todoDiv = document.createElement('div');
     todoDiv.classList.add('todo');
    
+    if(status == "Checked"){
+        todoDiv.classList.add('completed');
+    }
 
     //Create Li
     const newTodo = document.createElement('li');
@@ -85,10 +86,15 @@ function deleteCheck(e) {
     if (item.classList[0] == 'complete-btn') {
         const todo = item.parentElement;
         todo.classList.toggle('completed');
+
+        updateUncheckedProperty(item.parentElement.getAttribute('id'));
     }
 }
 
 
+
+//***********************************************************************************
+//                          Filter Function
 function filterTodo(e) {
     const todos = document.getElementById('todo-list');
     const todosLenght = todos.childNodes.length;
@@ -127,7 +133,12 @@ window.onload = function () {
     var retrievedObject = JSON.parse(localStorage.getItem('storedData'));
     if (retrievedObject != null) {
         for (let i = 0; i < retrievedObject.data.length; i++) {
-            addTodoFunction(retrievedObject.data[i].text);           
+            if(retrievedObject.data[i].status == "Checked"){
+                addTodoFunction(retrievedObject.data[i].text, "Checked");    
+            }
+            else{
+                addTodoFunction(retrievedObject.data[i].text);    
+            }     
         }
         assignIdtoList();
     }
@@ -182,22 +193,20 @@ function deleteItemfromLocalStorage(itemId) {
         retrievedObject.data.splice(itemId, 1);
         localStorage.setItem('storedData', JSON.stringify(retrievedObject));       
     }
-
 }
 
 
+// Update Todo Item to Local Storage
+function updateUncheckedProperty(itemId){
+    var retrievedObject = JSON.parse(localStorage.getItem('storedData'));
+    if (retrievedObject != null) {
+        if(retrievedObject.data[itemId].status == "Unchecked"){
+            retrievedObject.data[itemId].status = "Checked";
+        }
+        else{
+            retrievedObject.data[itemId].status = "Unchecked";
+        }        
+        localStorage.setItem('storedData', JSON.stringify(retrievedObject));       
+    }
+}
 
-
-
-document.getElementById('test-btn').addEventListener('click',
-    function () {
-        // var testObject = { 'one': 1, 'two': 2, 'three': 3 };
-
-        // // Put the object into storage
-        // localStorage.setItem('testObject', JSON.stringify(testObject));
-
-        // Retrieve the object from storage
-        var retrievedObject = localStorage.getItem('testObject1');
-
-        console.log('retrievedObject: ', retrievedObject);
-    });
