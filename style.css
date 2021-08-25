@@ -145,9 +145,18 @@ select{
 
 
 /*****************************************************************************************
-                                        Main CSS
+                                        Responsive CSS
 /* **********     Smart Phone   ***********/
 @media only screen and (max-width: 767px){ 
+    header h1{
+        font-size: 2rem;   
+    }
+    
+    form div input,
+    form div button{    
+        font-size: 1rem; 
+    }
+
     form{
         display: flex;
         flex-direction: column;
