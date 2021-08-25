@@ -156,6 +156,10 @@ select{
     form div button{    
         font-size: 1rem; 
     }
+    
+    .todo{     
+        font-size: 0.9rem;        
+    }
 
     form{
         display: flex;
