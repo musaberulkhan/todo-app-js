@@ -6,13 +6,18 @@
 
 body{
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(120deg, #e2c35d, #d88771);
+    background-image: linear-gradient(120deg, #252525, #240f0a);
     min-height: 100vh;
     color: white!important;
 }
 
-header{
-    font-size: 1.5rem;
+
+
+/*****************************************************************************************
+                                        Main CSS
+*/
+header h1{
+    font-size: 3rem;   
 }
 
 header,
@@ -23,12 +28,12 @@ form{
     align-items: center;
 }
 
-form input,
-form button{
+form div input,
+form div button{
     padding: 0.5rem;
     font-size: 2rem;
     border: none;
-    background: white;
+    background: white;    
 }
 
 form button{
@@ -50,7 +55,7 @@ form button:hover{
 }
 
 .todo-list{
-    min-width: 50%;
+    min-width: 80%;
     list-style: none;
 }
 
@@ -134,4 +139,37 @@ select{
 .select:hover::after{
     background: white;
     color: #ff6f47;
+}
+
+
+
+
+/*****************************************************************************************
+                                        Main CSS
+/* **********     Smart Phone   ***********/
+@media only screen and (max-width: 767px){ 
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .todo-list{
+        min-width: 90%;  
+        padding-left: 5px;      
+    }    
+    
+}  
+
+
+/* **********     Smart Phone   ***********/
+@media only screen and (max-width: 455px){ 
+    form div{
+        display: flex;
+        justify-content: center;
+    }
+    form div input{
+        width: 80%;
+
+     }
 }
